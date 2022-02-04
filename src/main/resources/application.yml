@@ -6,5 +6,4 @@ spring:
 
 smtp:
   server:
-    enabled: true
     port: 25

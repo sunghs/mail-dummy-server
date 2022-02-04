@@ -3,7 +3,6 @@ package sunghs.maildummyserver.service;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.mail.util.MimeMessageParser;
 import org.springframework.stereotype.Service;
 import org.subethamail.smtp.helper.SimpleMessageListener;
 import sunghs.maildummyserver.model.MailInfo;
@@ -22,7 +21,7 @@ public class MessageListenerService implements SimpleMessageListener {
 
     @Override
     public boolean accept(String from, String recipient) {
-        return true;
+        return recipient.contains("@");
     }
 
     @Override
@@ -30,15 +29,7 @@ public class MessageListenerService implements SimpleMessageListener {
     public void deliver(String from, String recipient, InputStream data) {
         Session session = Session.getDefaultInstance(new Properties());
         MimeMessage mimeMessage = new MimeMessage(session, data);
-        MimeMessageParser mimeMessageParser = mimeParseHelper.parse(mimeMessage);
-        MailInfo mailInfo = createMailInfo(mimeMessageParser);
+        MailInfo mailInfo = mimeParseHelper.parse(mimeMessage);
         log.info("from : {}, recipient : {}, {}", from, recipient, mailInfo.toString());
-    }
-
-    private MailInfo createMailInfo(MimeMessageParser mimeMessageParser) throws Exception {
-        MailInfo mailInfo = new MailInfo();
-        mailInfo.setSubject(mimeMessageParser.getSubject());
-        mailInfo.setContent(mimeMessageParser.getPlainContent());
-        return mailInfo;
     }
 }

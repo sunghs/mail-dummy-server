@@ -13,7 +13,5 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties("smtp.server")
 public class ServerConfigContext {
 
-    private boolean enabled;
-
     private int port;
 }

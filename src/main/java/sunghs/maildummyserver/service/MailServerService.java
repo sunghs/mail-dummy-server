@@ -25,17 +25,23 @@ public class MailServerService {
         smtpServer = SMTPServer
                 .port(serverConfigContext.getPort())
                 .simpleMessageListener(messageListenerService)
+                .serverThreadName("dummyServer")
                 .requireAuth(false)
+                .enableTLS(false)
+                .softwareName("sunghs mail dummy server with subethamail v1.0")
                 .build();
+
+        log.info("require auth : {}", smtpServer.getRequireAuth());
+        log.info("server port : {}", smtpServer.getPort());
+        log.info("connection timeout : {}", smtpServer.getConnectionTimeout());
+        log.info("max connection : {}", smtpServer.getMaxConnections());
+        log.info("max recipients : {}", smtpServer.getMaxRecipients());
+        log.info("max message size : {}", smtpServer.getMaxMessageSize());
     }
 
     @PostConstruct
     public void start() {
-        if (serverConfigContext.isEnabled()) {
-            smtpServer.start();
-        } else {
-            log.error("mail server start failed");
-        }
+        smtpServer.start();
     }
 
     @PreDestroy
