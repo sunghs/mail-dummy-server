@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: mail-dummy-server
+  profiles:
+    active: local
+
+smtp:
+  server:
+    enabled: true
+    port: 25

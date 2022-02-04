@@ -1,0 +1,41 @@
+buildscript {
+    ext {
+        subethasmtpVersion = "5.2.4"
+        commonsEmailVersion = "1.5"
+    }
+}
+
+plugins {
+    id 'org.springframework.boot' version '2.6.0'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+}
+
+group = 'sunghs'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
+
+configurations {
+
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation("org.springframework.boot:spring-boot-starter")
+    implementation("org.springframework.boot:spring-boot-configuration-processor")
+    implementation("org.projectlombok:lombok")
+    implementation("com.github.davidmoten:subethasmtp:${subethasmtpVersion}")
+    implementation("org.apache.commons:commons-email:${commonsEmailVersion}")
+
+    annotationProcessor("org.projectlombok:lombok")
+    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
