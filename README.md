@@ -19,7 +19,7 @@ smtp:
 `smtp.server.message-size-mb` : 최대로 메일을 받을 수 있는 사이즈 입니다.
 
 
-## environment
+## environment (2022-02-06)
 - Java 11
 - Spring Boot 2.6.0
 - Gradle 7.3
