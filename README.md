@@ -4,7 +4,8 @@
 
 메일 수신 후 해당 내용을 로깅 후 버립니다. 
 
-수신한 메일 핸들링이 필요한 경우 `sunghs.maildummyserver.service.MessageHandlerService` 의 `handle` 메소드를 수정하시면 됩니다.
+- 수신한 메일 핸들링 (로깅, 저장, 기타 등등)이 필요한 경우 `MessageHandlerService` 의 `handle` 메소드를 수정하시면 됩니다.
+- Accept 규칙에 관해서는 `MessageListenerService` 의 `accept`를 구현하시면 됩니다.
 
 
 ```
@@ -23,3 +24,14 @@ smtp:
 - Spring Boot 2.6.0
 - Gradle 7.3
 - Subethasmtp 5.2.4
+
+## example
+mail-dummy-server 구동 후 `localhost` 기준으로
+
+`telnet localhost 25`
+
+이후 smtp mail exchange 와 같이 메일을 전송하시면 됩니다.
+
+![](./img/example.png)
+
+실제 도메인을 연결하여 테스트 할 경우 네임서버(mx, spf 등) 추가 후 메일 전송하시면 됩니다.
