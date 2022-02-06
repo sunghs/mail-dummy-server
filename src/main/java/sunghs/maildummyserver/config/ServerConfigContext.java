@@ -14,4 +14,6 @@ import org.springframework.context.annotation.Configuration;
 public class ServerConfigContext {
 
     private int port;
+
+    private int messageSizeMb;
 }

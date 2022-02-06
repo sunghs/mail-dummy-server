@@ -24,6 +24,7 @@ public class MailServerService {
     private void init() {
         smtpServer = SMTPServer
                 .port(serverConfigContext.getPort())
+                .maxMessageSize(serverConfigContext.getMessageSizeMb() * 1024 * 1024)
                 .simpleMessageListener(messageListenerService)
                 .serverThreadName("dummyServer")
                 .requireAuth(false)
@@ -31,12 +32,13 @@ public class MailServerService {
                 .softwareName("sunghs mail dummy server with subethamail v1.0")
                 .build();
 
-        log.info("require auth : {}", smtpServer.getRequireAuth());
-        log.info("server port : {}", smtpServer.getPort());
-        log.info("connection timeout : {}", smtpServer.getConnectionTimeout());
-        log.info("max connection : {}", smtpServer.getMaxConnections());
-        log.info("max recipients : {}", smtpServer.getMaxRecipients());
-        log.info("max message size : {}", smtpServer.getMaxMessageSize());
+        log.debug("server config context : {}", serverConfigContext.toString());
+        log.debug("require auth : {}", smtpServer.getRequireAuth());
+        log.debug("server port : {}", smtpServer.getPort());
+        log.debug("connection timeout : {}", smtpServer.getConnectionTimeout());
+        log.debug("max connection : {}", smtpServer.getMaxConnections());
+        log.debug("max recipients : {}", smtpServer.getMaxRecipients());
+        log.debug("max message size : {}", smtpServer.getMaxMessageSize());
     }
 
     @PostConstruct

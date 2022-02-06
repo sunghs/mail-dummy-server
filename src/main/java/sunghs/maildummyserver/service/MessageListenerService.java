@@ -5,7 +5,6 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.subethamail.smtp.helper.SimpleMessageListener;
-import sunghs.maildummyserver.model.MailInfo;
 
 import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
@@ -17,7 +16,7 @@ import java.util.Properties;
 @RequiredArgsConstructor
 public class MessageListenerService implements SimpleMessageListener {
 
-    private final MimeParseHelper mimeParseHelper;
+    private final MessageHandlerService messageHandlerService;
 
     @Override
     public boolean accept(String from, String recipient) {
@@ -29,7 +28,6 @@ public class MessageListenerService implements SimpleMessageListener {
     public void deliver(String from, String recipient, InputStream data) {
         Session session = Session.getDefaultInstance(new Properties());
         MimeMessage mimeMessage = new MimeMessage(session, data);
-        MailInfo mailInfo = mimeParseHelper.parse(mimeMessage);
-        log.info("from : {}, recipient : {}, {}", from, recipient, mailInfo.toString());
+        messageHandlerService.handle(from, recipient, mimeMessage);
     }
 }

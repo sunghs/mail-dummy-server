@@ -7,3 +7,4 @@ spring:
 smtp:
   server:
     port: 25
+    message-size-mb: 16
