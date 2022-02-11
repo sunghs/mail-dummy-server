@@ -34,3 +34,8 @@ mail-dummy-server 구동 후 `localhost` 기준으로
 ![](./img/example.png)
 
 실제 도메인을 연결하여 테스트 할 경우 네임서버(mx, spf 등) 추가 후 메일 전송하시면 됩니다.
+
+## build & run
+```
+gradlew bootRun
+```
