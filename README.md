@@ -37,5 +37,10 @@ mail-dummy-server 구동 후 `localhost` 기준으로
 
 ## build & run
 ```
-gradlew bootRun
+$ gradlew bootRun
+```
+또는 VM 옵션등이 필요하면
+```
+$ gradlew bootJar
+$ java -jar ./build/libs/mail-dummy-server-1.0.jar
 ```
