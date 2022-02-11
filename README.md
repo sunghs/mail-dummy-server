@@ -14,8 +14,7 @@ smtp:
     port: 25
     message-size-mb: 16
 ```
-`smtp.server.port` : 메일을 수신 할 port 입니다.
-
+`smtp.server.port` : 메일을 수신 할 port 입니다.  
 `smtp.server.message-size-mb` : 최대로 메일을 받을 수 있는 사이즈 입니다.
 
 
